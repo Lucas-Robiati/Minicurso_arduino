@@ -1,0 +1,33 @@
+#define led 6
+#define pot A5
+
+void setup() 
+{
+  DDRD |= (1 << PD6);
+  /*
+  	10000000
+    01000000
+    --------
+    11000000
+  
+  	Pode ser feito usando numeros binarios
+    DDRD = 0b01000000
+  */
+  
+  DDRC &= ~(1 << PC5);
+  
+  Serial.begin(9600);
+
+}
+
+void loop() 
+{
+  
+  int potValue = analogRead(pot);
+  int ledEnergi = map(potValue, 0, 1023, 0, 255);
+  Serial.println(ledEnergi);
+  analogWrite(led, ledEnergi);
+  delay(500);
+}
+
+
